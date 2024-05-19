@@ -37,7 +37,7 @@
         cmd: mvn clean package
         chdir: /usr/war-web-project
 
-    - name: Align the folders between build and prod
+    - name: Align the folders between build and prod #drop there
       synchronize:
         mode: pull
         src: /usr/war-web-project/target/*war
