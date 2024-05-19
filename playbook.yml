@@ -2,14 +2,18 @@
 - name: prod update
   hosts: prod
   become: yes
+
   tasks:
+  - name: Ensure tomcat9 is present
     apt:
       name: tomcat9
       state: present
       update_cache: yes
 
+- name: build actions
   hosts: build
   become: yes
+
   tasks:
     - name: Ensure git is present
       apt:
@@ -28,7 +32,7 @@
         repo: http://github.com/koddas/war-web-project.git
         dest: /usr/war-web-project
 
-    - name: Run mvn clean boxfuse folder
+    - name: Run mvn clean the app's folder
       shell:
         cmd: mvn clean package
         chdir: /usr/war-web-project
