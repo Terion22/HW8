@@ -1,5 +1,4 @@
 ---
-#build the java app and transfer it on the prod env
 - hosts: prod
   become: yes
   tasks:
