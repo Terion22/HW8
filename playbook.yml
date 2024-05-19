@@ -26,7 +26,7 @@
         chdir: /usr/war-web-project
 
     - name: Align the folders between build and prod
-      synchrinize:
+      synchronize:
         mode: pull
         src: /usr/war-web-project/target/*war
         dest: /var/lib/tomcat9/webapps/
