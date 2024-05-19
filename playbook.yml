@@ -1,5 +1,6 @@
 ---
-- hosts: prod
+- name: prod update
+  hosts: prod
   become: yes
   tasks:
     apt:
@@ -7,7 +8,7 @@
       state: present
       update_cache: yes
 
-- hosts: build
+  hosts: build
   become: yes
   tasks:
     - name: Ensure git is present
@@ -38,7 +39,7 @@
         src: /usr/war-web-project/target/*war
         dest: /var/lib/tomcat9/webapps/
       delegate_to: "{{groups['prod'][0]}}"
-- hosts: prod
+  hosts: prod
   become: yes
   tasks:
   - name: Ensure tomcat service is started
