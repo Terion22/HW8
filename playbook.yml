@@ -43,6 +43,8 @@
         src: /usr/war-web-project/target/*war
         dest: /var/lib/tomcat9/webapps/
       delegate_to: "{{groups['prod'][0]}}"
+
+- name: prod check
   hosts: prod
   become: yes
   tasks:
