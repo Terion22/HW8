@@ -1,0 +1,13 @@
+---
+#build the java app and transfer it on the prod env
+- hosts: build
+  become: yes
+  tasks:
+      apt:
+        update_cache: yes
+
+- hosts: prod
+  become: yes
+  tasks:
+    apt:
+      update_cache: yes
