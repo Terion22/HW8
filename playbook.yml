@@ -1,19 +1,17 @@
 ---
-- name: prod update
-  hosts: prod
+#prod infrastructure
+- hosts: prod
   become: yes
-
   tasks:
-  - name: Ensure tomcat9 is present
-    apt:
-      name: tomcat9
-      state: present
-      update_cache: yes
+    - name: Ensure tomcat9 is present
+      apt:
+        name: tomcat9
+        state: present
+        update_cache: yes
 
-- name: build actions
-  hosts: build
+#build infrastructure
+- hosts: build
   become: yes
-
   tasks:
     - name: Ensure git is present
       apt:
@@ -37,19 +35,20 @@
         cmd: mvn clean package
         chdir: /usr/war-web-project
 
-    - name: Align the folders between build and prod
+    - name: Synchronization of build and prod directories
       synchronize:
         mode: pull
-        src: /usr/war-web-project/target/wwp-1.0.0.war
+        src: rsync://usr/war-web-project/target/wwp-1.0.0.war
         dest: /var/lib/tomcat9/webapps/
-      delegate_to: "{{groups['prod'][0]}}"
+      delegate_to: 158.160.87.151
 
-- name: prod check
-  hosts: prod
+#prod check
+- hosts: prod
   become: yes
   tasks:
-  - name: Ensure tomcat service is started
-    service:
-      name: tomcat9
-      state: started
+
+    - name: Ensure tomcat service is started
+      service:
+        name: tomcat9
+        state: started
 ...
