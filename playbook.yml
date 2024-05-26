@@ -38,9 +38,9 @@
     - name: Synchronization of build and prod directories
       synchronize:
         mode: pull
-        src: rsync://usr/war-web-project/target/wwp-1.0.0.war
+        src: /usr/war-web-project/target/wwp-1.0.0.war
         dest: /var/lib/tomcat9/webapps/
-      delegate_to: "{{ groups['prod'][0] }}"
+      delegate_to: "{{ ['prod'] }}"
 
 #prod check
 - hosts: prod
