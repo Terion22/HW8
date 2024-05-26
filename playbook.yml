@@ -37,10 +37,10 @@
         cmd: mvn clean package
         chdir: /usr/war-web-project
 
-    - name: Align the folders between build and prod #drop there
+    - name: Align the folders between build and prod
       synchronize:
         mode: pull
-        src: /usr/war-web-project/target/*war
+        src: /usr/war-web-project/target/wwp-1.0.0.war
         dest: /var/lib/tomcat9/webapps/
       delegate_to: "{{groups['prod'][0]}}"
 
