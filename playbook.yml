@@ -40,7 +40,7 @@
         mode: pull
         src: /usr/war-web-project/target/wwp-1.0.0.war
         dest: /var/lib/tomcat9/webapps/
-      delegate_to: "{{groups['prd'][0]}}"
+      delegate_to: "{{ groups['prod'][0] }}"
 
 #prod check
 - hosts: prod
